@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { Membro } = require("../bdd/models");
+const { Membro } = require("../db/models");
 const bcrypt = require("bcrypt");
 
 function renderLogin(_, res) {
