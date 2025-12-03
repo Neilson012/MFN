@@ -1,4 +1,4 @@
-const { Time, Jogador, Tecnico, Presidente } = require("../bdd/models")
+const { Time, Jogador, Tecnico, Presidente } = require("../db/models")
 
 async function renderTimes(req, res) {
     const times = await Time.findAll({
