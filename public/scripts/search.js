@@ -1,5 +1,5 @@
 const input = document.querySelector(".search")
-const elements = document.querySelectorAll(".time, .jogadores")
+const elements = document.querySelectorAll(".time, .jogador")
 const register = document.querySelector("[class^='register-']")
 const registerHeight = register.offsetHeight
 
