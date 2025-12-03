@@ -1,1 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
 
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.bg-blue {
+    background-color: #37C5F2;
+}
+
+.h-100vh {
+    height: 100vh;
+}
+
+.h-80vh {
+    height: 80vh;
+}
+
+/* Alert */
+
+@keyframes enter {
+    from {
+        opacity: 0;
+        transform: translate(0, -100px);
+    }
+    to {
+        opacity: 100%;
+        transform: translate(0, 0px);
+    }
+}
+
+@keyframes leave {
+    from {
+        opacity: 100%;
+        transform: translate(0, 0px);
+    }
+    to {
+        opacity: 0;
+        transform: translate(0, 100px);
+    }
+}
+
+.alert {
+    position: absolute;
+    top: 1em;
+    left: 0;
+    width: calc(100vw - 2em);
+    padding: 1em;
+    margin: 0 1em;
+    border-radius: .6em;
+
+    color: white;
+    font-weight: 600;
+
+    cursor: default;
+}
+
+.alert.success {
+    background-color: #51E874;
+}
+.alert.error {
+    background-color: #f95c5c;
+}
+
+.alert.enter {
+    animation-name: enter;
+    animation-duration: 1s;
+}
+.alert.leave {
+    animation-name: leave;
+    animation-duration: 1s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* .error {
+    color: #f95c5c;
+    margin: -30px 0 10px;
+    font-weight: 600;
+} */
+
+/* Navbar */
+
+nav, nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+nav {
+    padding: 1em;
+    color: #fff;
+    background-color: #02C2FF;
+}
+
+nav h1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.25em;
+    font-weight: 900;
+}
+
+nav ul a {
+    font-weight: 700;
+    font-size: 0.8em;
+    transition: color ease .3s;
+}
+
+nav ul a:hover, nav ul a.active {
+    color: #09619b;
+}
+
+a.logout {
+    color: #f95c5c;
+}
+a.logout:hover {
+    color: #cf0e0e;
+}
+
+/* Forms */
+
+.content-center {
+    display: grid;
+    place-items: center;
+}
+
+.form-container, .form-container form, .form-container .buttons, .form-container .inputs,  .form-container .input {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container {
+    padding: 1em;
+    background-color: white;
+    min-width: 100vw;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.form-container form{
+    justify-content: space-between;
+    height: 80%;
+}
+
+.form-container .inputs {
+    height: 100%;
+    justify-content: center;
+    gap: 10px;
+}
+
+.content-center-min .form-container{
+    min-width: 100%;
+}
+
+.form-container h1 {
+    font-size: 2em;
+    text-align: center;
+    align-content: center;
+    font-weight: 600;
+    height: 20%;
+}
+
+.form-container .input {
+    position: relative;
+}
+
+.form-container input {
+    border: #D0D5DD 3px solid;
+    border-radius: 10px;
+    padding: .8em;
+}
+
+.form-container label {
+    position: absolute;
+    pointer-events: none;
+    color: #98A2B3;
+    top: 0;
+    left: .85em;
+    margin-top: 13px;
+    font-size: .95em;
+    transition: all ease .3s, color 0s;
+}
+
+.form-container input:focus + label,
+.form-container input:not(:placeholder-shown) + label {
+    top: -10px;
+    margin-top: 0;
+    color: black;
+    background-color: white;
+}
+.form-container input:not(:placeholder-shown):not(:focus) + label {
+    color: #98A2B3;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+.form-container input::placeholder{
+    color: transparent;
+}
+
+.form-container .buttons {
+    margin-top: 1.8em;
+    gap: .9em;
+}
+
+.manage.form-container .buttons {
+    margin-top: 2.5em;
+}
+
+[class^="btn"]  {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    font-size: 0.8em;
+    font-weight: 600;
+
+    letter-spacing: .020rem;
+    padding: 10px 0;
+    border-radius: 10px;
+
+    transition: background-color ease .3s;
+}
+
+.btn-secondary {
+    color: #02C2FF;
+    background-color: #BCECFC;
+}
+
+.btn-primary {
+    color: white;
+    background-color: #00C2FF;
+}
+
+.btn-secondary:hover {
+    color: white;
+    background-color: #63d3f8;
+}
+
+.btn-primary:hover {
+    background-color: #007da3;
+}
+
+
+
+/* Escolas e Alunos */
+
+.search {
+    width: 100%;
+    padding: .5em 1em;
+    border-radius: 10px;
+    margin-top: 0.5em;
+
+    font-size: 1.25em;
+    background-color: #bcecfc;
+    transition: box-shadow ease .3s;
+}
+.search:focus {
+    border-color: #bcecfc;
+    outline: none;
+    box-shadow: 0 0 0 .2rem #02c4ff7c;
+}
+.search::placeholder{
+    color: #9abcc7;
+    font-size: 1em;
+}
+
+@media screen and (min-width: 450px) {
+    .form-container {
+        padding: 1.5em 2em;
+    }
+
+    .content-center-min .form-container{
+        min-width: 35vw;
+
+    }
+
+    .form-container h1 {
+        font-size: 3em;
+    }
+    .form-container input {
+        padding: 1em;
+    }
+    [class^="btn"]  {
+        font-size: 1em;
+        padding: 15px 0;
+    }
+    
+    nav, nav ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1em;
+    }
+
+    nav {
+        padding: 1.7em;
+        color: #fff;
+        background-color: #02C2FF;
+    }
+
+    nav h1 {
+        font-family: "Roboto", sans-serif;
+        font-size: 1.75em;
+        font-weight: 900;
+    }
+
+    nav ul a {
+        font-weight: 700;
+        font-size: 1.2em;
+        transition: color ease .3s;
+    }
+
+}
+
+@media screen and (min-width: 800px) {
+    .form-container {
+        border-radius: 20px;
+        min-width: max(25vw, 500px);
+        height: auto;
+    }
+
+    .manage.form-container {
+        min-width: max(30vw, 750px);
+    }
+
+    .manage.form-container h1 {
+        margin: 0px 0 50px;
+    }
+    .form-container h1 {
+        margin: 20px 0 30px;
+        height: auto;
+    }
+    .form-container:not(.manage) h1{
+        font-size: 1.75em;
+    }
+
+}
