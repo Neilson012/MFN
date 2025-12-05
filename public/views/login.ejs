@@ -1,1 +1,24 @@
+<%- include('partials/header', {title: "Login Técnico"}) %>
+
+<body class="bg-blue content-center h-screen">
+    <div class="form-container ">
+        <h1>Login do Técnico</h1>
+        <form action="/tecnico/login" method="post">
+            <div class="inputs">
+                <div class="input">
+                    <input type="text" name="email" placeholder=" ">
+                    <label for="email">Email do técnico</label>
+                </div>
+                <div class="input">
+                    <input type="password" name="senha" placeholder=" ">
+                    <label for="senha">Senha</label>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="btn-secondary"><img src="./assets/google.svg" alt="google icon">Continuar com Google</button>
+                <button class="btn-primary" type="submit">Entrar como Técnico</button>
+            </div>
+        </form>
+    </div>
+</body>
 
