@@ -1,1 +1,39 @@
+<%- include('../partials/header', {title: "Editar time"}) %>
+
+<body>
+    <%- include('../partials/navbar', {active: 1, page: "logado"}) %>
+
+    <main class="content-center h-screen">
+        <div class="form-container manage">
+            <h1>Editar Time</h1>
+            <form action="/times/<%= id %>/editar" method="post">
+                <div class="inputs">
+                    <div class="input">
+                        <input type="text" name="nome" placeholder=" " value="<%= nome %>">
+                        <label for="nome">Nome do time</label>
+                    </div>
+
+                    <div class="input">
+                        <input type="text" name="estadio" placeholder=" " value="<%= estadio %>">
+                        <label for="estadio">Estádio</label>
+                    </div>
+
+                    <div class="input">
+                        <input type="number" name="fundacao" placeholder=" " value="<%= fundacao %>">
+                        <label for="fundacao">Ano de Fundação</label>
+                    </div>
+
+                    <div class="input">
+                        <input type="text" name="cidade" placeholder=" " value="<%= cidade %>">
+                        <label for="cidade">Cidade</label>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-primary">Salvar alterações</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
 
