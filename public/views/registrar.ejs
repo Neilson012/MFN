@@ -1,1 +1,33 @@
+<%- include('partials/header', {title: "Registrar Técnico"}) %>
+
+<body class="bg-blue content-center h-screen">
+    <div class="form-container">
+        <h1>Registrar Técnico</h1>
+        <form action="/tecnicos/registrar" method="post">
+            <div class="inputs">
+                <div class="input">
+                    <input type="text" name="nome" placeholder=" ">
+                    <label for="nome">Nome do Técnico</label>
+                </div>
+                <div class="input">
+                    <input type="text" name="email" placeholder=" ">
+                    <label for="email">Email</label>
+                </div>
+                <div class="input">
+                    <input type="password" name="senha" placeholder=" ">
+                    <label for="senha">Senha</label>
+                </div>
+                <div class="input">
+                    <input type="password" name="confirmarSenha" placeholder=" ">
+                    <label for="confirmarSenha">Confirmar senha</label>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="btn-secondary"><img src="./assets/google.svg" alt="google icon">Continuar com
+                    Google</button>
+                <button class="btn-primary" type="submit">Registrar Técnico</button>
+            </div>
+        </form>
+    </div>
+</body>
 
