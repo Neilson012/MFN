@@ -1,1 +1,15 @@
+<%- include('partials/header', {css: 'home'}) %>
 
+<body>
+    <%- include('partials/navbar', {page}) %>
+
+    <% var url = page == "home" ? "/registrar-time" : "/perfil" %>
+
+    <main class="h-screen">
+        <h2>Time<span>Manager</span></h2>
+        <p>Gerencie seu time com facilidade</p>
+        <a href="<%= url %>">Comece agora <img src="/assets/arrow.svg" alt="setinha"></a>
+    </main>
+
+</body>
+</html>
