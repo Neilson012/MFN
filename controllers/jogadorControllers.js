@@ -1,4 +1,4 @@
-const { Time, Jogador } = require("../db/models")
+const { Time, Jogador } = require("../bdd/models")
 
 async function renderPlayers(req, res) {
     const time = await Time.findByPk(req.params.id, {
