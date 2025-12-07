@@ -41,7 +41,6 @@ async function register(req, res) {
         return res.redirect("/registrar?msg=Preencha%20todos%20os%20campos");
     }
 
-    // Agora só aceitamos jogador, tecnico ou time
     const tiposValidos = ["jogador", "tecnico", "time"];
     if (!tiposValidos.includes(tipoMembro)) {
         return res.redirect("/registrar?msg=Tipo%20inv%C3%A1lido");
@@ -58,7 +57,7 @@ async function register(req, res) {
             nome, 
             email, 
             senha: hashedPassword, 
-            tipoMembro  // agora contém "jogador", "tecnico" ou "time"
+            tipoMembro 
         });
 
         const token = jwt.sign({ membroID: membro.id }, process.env.SECRET, { expiresIn: "1h" });
