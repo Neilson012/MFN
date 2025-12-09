@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+
+    <% if (typeof css != "undefined") {%>
+        <link rel="stylesheet" href="/styles/<%= css %>.css">
+    <% }%>
+
+    <% if (typeof title == "undefined") {%>
+        <title>Teamditor</title>
+    <% } else {%>
+        <title>Teamditor - <%= title %></title>
+    <% }%>
+
+    <script src="/scripts/main.js" defer></script>
+
+    <% if (typeof js != "undefined") {%>
+        <script src="/scripts/<%= js %>.js" defer></script>
+    <% }%>
+</head>

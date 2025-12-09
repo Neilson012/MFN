@@ -1,0 +1,27 @@
+<%- include('partials/header', {title: "Perfil do Técnico"}) %>
+
+<body>
+    <%- include('partials/navbar', {active: 2, page: "logado"}) %>
+
+    <div class="user-data h-screen">
+        <img src="/assets/user_default_pfp.png" alt="Foto do técnico">
+        <h2><%= nome %></h2>
+        <span><%= email %></span>
+    </div>
+    <style>
+        .user-data {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h2 {
+            font-size: 4em;
+        }
+        span {
+            color: #CBD0D9;
+            margin-top: -15px;
+        }
+    </style>
+</body>
+</html>
