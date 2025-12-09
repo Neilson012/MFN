@@ -1,15 +1,14 @@
-const { Time, Jogador, Tecnico, Presidente } = require("../bdd/models")
+const { Time, Jogador, Tecnico } = require("../db/models")
 
 async function renderTimes(req, res) {
     const times = await Time.findAll({
-        where: { administrador_id: req.user.id },
+        where: { tecnico_id: req.user.id },
         include: [
             { model: Jogador, as: "jogadores" },
-            { model: Tecnico, as: "tecnico" },
-            { model: Presidente, as: "presidente" }
+            { model: Tecnico, as: "tecnicos" },
         ]
     })
-    res.render("times/index", { times })
+    res.render("times/index", { times, tecnico: req.user.nome })
 }
 
 function renderRegister(_, res) {
@@ -17,32 +16,21 @@ function renderRegister(_, res) {
 }
 
 async function register(req, res) {
-    const { nome, cidade, presidente, tecnico, telefone } = req.body
+    const { nome, cidade } = req.body
 
-    if (!nome || !cidade || !presidente || !tecnico || !telefone)
+    if (!nome || !cidade)
         return res.redirect("/times/registrar?msg=Preencha%20todos%20os%20campos")
 
     try {
-        const time = await Time.create({
+        await Time.create({
             nome,
             cidade,
-            telefone,
-            administrador_id: req.user.id
-        })
-
-        await Presidente.create({
-            nome: presidente,
-            time_id: time.id
-        })
-
-        await Tecnico.create({
-            nome: tecnico,
-            time_id: time.id
+            tecnico_id: req.user.id
         })
 
         res.redirect("/times?msg=Time%20registrado%20com%20sucesso&status=success")
     } catch (err) {
-        res.redirect("/times?msg=Erro%20ao%20registrar%20time")
+        res.redirect("/times")
     }
 }
 
@@ -50,24 +38,24 @@ function renderEdit(req, res) {
     Time.findByPk(req.params.id, {
         include: [
             { model: Jogador, as: "jogadores" },
-            { model: Tecnico, as: "tecnico" },
-            { model: Presidente, as: "presidente" }
+            { model: Tecnico, as: "tecnicos" }
         ]
     }).then(time => {
         if (!time) return res.redirect("/times")
+        console.log(time.dataValues)
         res.render("times/editar", { ...time.dataValues })
     })
 }
 
 async function edit(req, res) {
-    const { nome, cidade, telefone } = req.body
+    const { nome, cidade } = req.body
 
-    if (!nome || !cidade || !telefone)
+    if (!nome || !cidade)
         return res.redirect(`/times/${req.params.id}/editar?msg=Preencha%20todos%20os%20campos`)
 
     try {
         await Time.update(
-            { nome, cidade, telefone },
+            { nome, cidade },
             { where: { id: req.params.id } }
         )
         res.redirect("/times?msg=Time%20editado%20com%20sucesso&status=success")
