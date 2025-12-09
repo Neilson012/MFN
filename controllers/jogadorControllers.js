@@ -1,6 +1,6 @@
-const { Time, Jogador } = require("../bdd/models")
+const { Time, Jogador } = require("../db/models")
 
-async function renderPlayers(req, res) {
+async function renderJogadores(req, res) {
     const time = await Time.findByPk(req.params.id, {
         include: [{ model: Jogador, as: "jogadores" }],
         attributes: ["id", "nome"]
@@ -14,11 +14,12 @@ function renderRegister(req, res) {
 
 async function register(req, res) {
     const paginaJogadores = `/times/${req.params.id}/jogadores`
-    const { nome, posicao, numero, nacionalidade } = req.body
-    if (!nome || !posicao || !numero || !nacionalidade) return res.redirect(paginaJogadores)
+    const { nome, numero_camisa, email, cpf } = req.body
+    console.log(req.body)
+    if (!nome || !numero_camisa || !email || !cpf) return res.redirect(paginaJogadores)
 
     try {
-        await Jogador.create({ nome, posicao, numero, nacionalidade, time_id: req.params.id })
+        await Jogador.create({ nome, numero_camisa, email, cpf, time_id: req.params.id })
         res.redirect(paginaJogadores + "?msg=Jogador%20registrado%20com%20sucesso&status=success")
     } catch (err) {
         res.redirect(paginaJogadores + "?msg=Erro%20ao%20registrar%20jogador")
@@ -42,13 +43,13 @@ function renderEdit(req, res) {
 }
 
 async function edit(req, res) {
-    const { nome, posicao, numero } = req.body
-    if (!nome || !posicao || !numero)
+    const { nome, numero_camisa, email } = req.body
+    if (!nome || !numero_camisa || !email)
         return res.redirect(`/jogador/${req.params.id}/editar?msg=Preencha%20todos%20os%20campos`)
 
     try {
         await Jogador.update(
-            { nome, posicao, numero },
+            { nome, numero_camisa, email },
             { where: { id: req.params.id } }
         )
         res.redirect(`/times?msg=Jogador%20editado%20com%20sucesso&status=success`)
@@ -68,4 +69,4 @@ async function remove(req, res) {
     res.redirect(`/times/${req.params.time_id}/jogadores?msg=Jogador%20excluido%20com%20sucesso&status=success`)
 }
 
-module.exports = { renderPlayers, renderRegister, register, find, renderEdit, edit, remove }
+module.exports = { renderJogadores, renderRegister, register, find, renderEdit, edit, remove }
