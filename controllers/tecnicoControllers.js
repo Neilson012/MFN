@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { Membro } = require("../bdd/models");
+const { Tecnico } = require("../db/models");
 const bcrypt = require("bcrypt");
 
 function renderLogin(_, res) {
@@ -12,18 +12,18 @@ function renderRegister(_, res) {
 
 async function login(req, res) {
     const { email, senha } = req.body;
-    const membro = await Membro.findOne({ where: { email } });
+    const tecnico = await Tecnico.findOne({ where: { email } });
 
-    if (!membro) {
+    if (!tecnico) {
         return res.redirect("/login?msg=Usu%C3%A1rio%20n%C3%A3o%20encontrado");
     }
 
-    const correctPassword = await bcrypt.compare(senha, membro.senha);
+    const correctPassword = await bcrypt.compare(senha, tecnico.senha);
     if (!correctPassword) {
         return res.redirect("/login?msg=Senha%20incorreta");
     }
 
-    const token = jwt.sign({ membroID: membro.id }, process.env.SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ tecnicoID: tecnico.id }, process.env.SECRET, { expiresIn: "1h" });
 
     res.cookie('auth', token, {
         httpOnly: true,
@@ -35,15 +35,10 @@ async function login(req, res) {
 }
 
 async function register(req, res) {
-    const { nome, email, senha, confirmarSenha, tipoMembro } = req.body;
+    const { nome, email, senha, confirmarSenha } = req.body;
 
-    if (!nome || !email || !senha || !confirmarSenha || !tipoMembro) {
+    if (!nome || !email || !senha || !confirmarSenha) {
         return res.redirect("/registrar?msg=Preencha%20todos%20os%20campos");
-    }
-
-    const tiposValidos = ["jogador", "tecnico", "time"];
-    if (!tiposValidos.includes(tipoMembro)) {
-        return res.redirect("/registrar?msg=Tipo%20inv%C3%A1lido");
     }
     
     if (senha !== confirmarSenha) {
@@ -53,14 +48,13 @@ async function register(req, res) {
     try {
         const hashedPassword = await bcrypt.hash(senha, 10);
 
-        const membro = await Membro.create({ 
+        const tecnico = await Tecnico.create({ 
             nome, 
             email, 
             senha: hashedPassword, 
-            tipoMembro 
         });
 
-        const token = jwt.sign({ membroID: membro.id }, process.env.SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ tecnicoID: tecnico.id }, process.env.SECRET, { expiresIn: "1h" });
 
         res.cookie('auth', token, {
             httpOnly: true,
@@ -83,6 +77,7 @@ function logout(_, res) {
 }
 
 function perfil(req, res) {
+    console.log(req.user)
     res.render("perfil", { ...req.user });
 }
 
