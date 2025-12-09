@@ -22,27 +22,6 @@ const Tecnico = db.define('Tecnico', {
     },
 }, { tableName: 'tecnicos' })
 
-const Presidente = db.define('Presidente', {
-    id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    nome: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    email: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false,
-    },
-    senha: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-}, { tableName: 'presidentes' })
-
 const Time = db.define('Time', {
     id: {
         type: Sequelize.INTEGER,
@@ -53,15 +32,11 @@ const Time = db.define('Time', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    endereco: {
-        type: Sequelize.STRING,
-        allowNull: true,
-    },
     tecnico: {
         type: Sequelize.STRING,
         allowNull: true,
     },
-    telefone: {
+    cidade: {
         type: Sequelize.STRING,
         allowNull: true,
     },
@@ -93,4 +68,4 @@ const Jogador = db.define('Jogador', {
     },
 }, { tableName: 'jogadores' })
 
-module.exports = { Tecnico, Presidente, Time, Jogador }
+module.exports = { Tecnico, Time, Jogador }
